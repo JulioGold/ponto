@@ -99,7 +99,8 @@ function callback() {
 				saldoAnteriorEmHoras -= (parseInt(spe[2], 10) / 60);
 			}
 
-			var total = 0;
+			var total = saldoAtualEmHoras;
+			
 			var hoje = ((dataHoje.getDate() < 10) ? '0' + dataHoje.getDate() : dataHoje.getDate()) + '/' +
 			       ((dataHoje.getMonth()+1 < 10) ? '0' + (dataHoje.getMonth()+1) : (dataHoje.getMonth()+1));
 
