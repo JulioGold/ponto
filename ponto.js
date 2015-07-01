@@ -100,7 +100,7 @@ function callback() {
 			}
 
 			var total = 0;
-			hoje = ((dataHoje.getDate() < 10) ? '0' + dataHoje.getDate() : dataHoje.getDate()) + '/' +
+			var hoje = ((dataHoje.getDate() < 10) ? '0' + dataHoje.getDate() : dataHoje.getDate()) + '/' +
 			       ((dataHoje.getMonth()+1 < 10) ? '0' + (dataHoje.getMonth()+1) : (dataHoje.getMonth()+1));
 
 			if (ultimoDiaHorasData == hoje) {
