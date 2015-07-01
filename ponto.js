@@ -80,6 +80,8 @@ function callback() {
 			var saldoAtualHoras = $('#segundaColunaTotais tr:last-child td.valorEventoTotal').text();
 			var descricaoAtualHoras = $('#segundaColunaTotais tr:last-child td.descricaoEventoTotal').text();
 			var ultimoDiaHoras = $('#diasDoEspelho tr:last-child:eq(1) td:eq(4)').text();
+			var ultimoDiaHorasData = $('#diasDoEspelho tr:last-child:eq(1) td:eq(0)').text();
+			var dataHoje = new Date();
 			var sp = /(-?\d\d):(\d\d)/.exec(saldoAtualHoras);
 			var spe = /(-?\d\d):(\d\d)/.exec(ultimoDiaHoras);
 
@@ -97,7 +99,13 @@ function callback() {
 				saldoAnteriorEmHoras -= (parseInt(spe[2], 10) / 60);
 			}
 
-			var total = saldoAnteriorEmHoras + saldoAtualEmHoras;
+			var total = 0;
+			var hoje = ((dataHoje.getDate() < 10) ? '0' + dataHoje.getDate() : dataHoje.getDate()) + '/' +
+			       ((dataHoje.getMonth()+1 < 10) ? '0' + (dataHoje.getMonth()+1) : (dataHoje.getMonth()+1));
+
+			if (ultimoDiaHorasData == hoje) {
+				total = saldoAnteriorEmHoras + saldoAtualEmHoras
+			}
 
 			// Caso apareça o fechamento de horas negativas
 			if (descricaoAtualHoras == "Fechamento BH (-)") {
