@@ -5,8 +5,8 @@ function callback() {
 		function calculaPontosDia(pontos) {
 			var horaAgora = new Date();
 			var agora = horaAgora.getHours() + ":" + horaAgora.getMinutes();
-			pontos[2] = pontos[2] === null ? pontoTextToDateTime(agora) : pontos[2];
-			horasTarde = (pontos[3] === null) ? 0 : (pontos[3] - pontos[2]);
+			pontos[3] = pontos[3] === null ? pontoTextToDateTime(agora) : pontos[3];
+			horasTarde = (pontos[2] === null) ? 0 : (pontos[3] - pontos[2]);
 			var horasTrab = (pontos[1] - pontos[0]) + horasTarde;
 			var horasTrabH = (horasTrab / (60 * 60 * 1000));
 			var horasExtrasFolgaH = ((horasTrab - (8.75 * 60 * 60 * 1000)) / (60 * 60 * 1000));
