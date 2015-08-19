@@ -3,7 +3,9 @@ function callback() {
 		var jQuery = $;
 		// --------------------------------------------------------------------------------
 		function calculaPontosDia(pontos) {
-			pontos[2] = pontos[2] === null ? pontoTextToDateTime(new Date()) : pontos[2];
+			var horaAgora = new Date();
+			var agora = horaAgora.getHours() + ":" + horaAgora.getMinutes();
+			pontos[2] = pontos[2] === null ? pontoTextToDateTime(agora) : pontos[2];
 			horasTarde = (pontos[3] === null) ? 0 : (pontos[3] - pontos[2]);
 			var horasTrab = (pontos[1] - pontos[0]) + horasTarde;
 			var horasTrabH = (horasTrab / (60 * 60 * 1000));
