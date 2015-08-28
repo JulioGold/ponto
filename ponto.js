@@ -7,7 +7,8 @@ function callback() {
 			var agora = horaAgora.getHours() + ":" + horaAgora.getMinutes();
 			pontos[3] = pontos[3] === null ? pontoTextToDateTime([agora])[0] : pontos[3];
 			horasTarde = (pontos[2] === null) ? 0 : (pontos[3] - pontos[2]);
-			var horasTrab = (pontos[1] - pontos[0]) + horasTarde;
+			horasManha = (pontos[1] === null) ? 0 : (pontos[1] - pontos[0]);
+			var horasTrab = (pontos[0] === null) ? 0 : (horasManha + horasTarde);
 			var horasTrabH = (horasTrab / (60 * 60 * 1000));
 			var horasExtrasFolgaH = ((horasTrab - (8.75 * 60 * 60 * 1000)) / (60 * 60 * 1000));
 
