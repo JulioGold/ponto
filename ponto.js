@@ -3,17 +3,18 @@ function callback() {
 		var jQuery = $;
 		// --------------------------------------------------------------------------------
 		function calculaPontosDia(periodoTrabalhado) {
-			var horaAgora = new Date();
-			var agora = horaAgora.getHours() + ":" + horaAgora.getMinutes();
 
-			var horasTrab;
 
-			periodoTrabalhado.map(function (pontos) {
-				horasTrab = pontos.reduce(function (a, b) {
+			var horasTrab = periodoTrabalhado.map(function (pontos) {
+				return pontos.reduce(function (a, b) {
 					if (!a) return b;
 					return b - a;
 				});
 			});
+
+			horasTrab = horasTrab.reduce(function (a, b) {
+				return a + b;
+			}, 0);
 
 			var horasTrabH = (horasTrab / (60 * 60 * 1000));
 			var horasExtrasFolgaH = ((horasTrab - (8.75 * 60 * 60 * 1000)) / (60 * 60 * 1000));
@@ -32,12 +33,8 @@ function callback() {
 
 		function pontoTextToDateTime(periodoTrabalhado) {
 
-			var pontos = periodoTrabalhado.map(function (ponto) {
-				return ponto.split(' ');
-			})
-
-			return pontos.map(function (ponto) {
-				return ponto.map(function (b) {
+			return periodoTrabalhado.map(function (ponto) {
+				return ponto.split(' ').map(function (b) {
 					if (!b) return null;
 					var d = new Date();
 					var sp = /(\d\d):(\d\d)/.exec(b);
@@ -84,13 +81,15 @@ function callback() {
 		var pontosData = getPontosData();
 
 		var espelho = pontosData.map(function (a) {
-			return '</br>+ <strong>Dia</strong>: ' + a.dia + ' <strong>Pontos</strong>: ' + JSON.stringify(a.periodoTrabalhado.map(function (pontos) {
-				pontos.map(function (b) {
-					if (!b) return null;
-					return b.getUTCHours() + ':' + b.getUTCMinutes();
-				});
-			})) + '</br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Horas Trabalhadas</strong>: ' + a.horasTrabalhadas + '</br>&nbsp;&nbsp;&nbsp;&nbsp;'
-				+ '<strong>Horas Extras/Folga</strong>' + ': ' + '<span style="color:' + (a.isFolga ? "red" : "green") + ';">' + a.horasExtrasFolga + '</span>';
+			return '</br>+ <strong>Dia</strong>: ' + a.dia +
+				' <strong>Pontos</strong>: ' + JSON.stringify(a.periodoTrabalhado.map(function (pontos) {
+					return pontos.map(function (b) {
+						if (!b) return null;
+						return b.getUTCHours() + ':' + b.getUTCMinutes();
+					});
+				})) +
+				'</br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Horas Trabalhadas</strong>: ' + a.horasTrabalhadas +
+				'</br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Horas Extras/Folga</strong>: ' + '<span style="color:' + (a.isFolga ? "red" : "green") + ';">' + a.horasExtrasFolga + '</span>';
 		}).join('</br>');
 
 		// Pega o tamanho do texto do último campo "Marcações", se menor que 11 então ainda não acabou o dia, tenho que descontar essas horas
