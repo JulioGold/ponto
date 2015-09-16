@@ -84,9 +84,11 @@ function callback() {
 		var pontosData = getPontosData();
 
 		var espelho = pontosData.map(function (a) {
-			return '</br>+ <strong>Dia</strong>: ' + a.dia + ' <strong>Pontos</strong>: ' + JSON.stringify(a.pontos.map(function (b) {
-				if (!b) return null;
-				return b.getUTCHours() + ':' + b.getUTCMinutes();
+			return '</br>+ <strong>Dia</strong>: ' + a.dia + ' <strong>Pontos</strong>: ' + JSON.stringify(a.periodoTrabalhado.map(function (pontos) {
+				pontos.map(function (b) {
+					if (!b) return null;
+					return b.getUTCHours() + ':' + b.getUTCMinutes();
+				});
 			})) + '</br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Horas Trabalhadas</strong>: ' + a.horasTrabalhadas + '</br>&nbsp;&nbsp;&nbsp;&nbsp;'
 				+ '<strong>Horas Extras/Folga</strong>' + ': ' + '<span style="color:' + (a.isFolga ? "red" : "green") + ';">' + a.horasExtrasFolga + '</span>';
 		}).join('</br>');
