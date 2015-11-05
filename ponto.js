@@ -110,11 +110,13 @@ function callback() {
 				saldoAtualEmHoras -= (parseInt(sp[2], 10) / 60);
 			}
 
-			var saldoAnteriorEmHoras = parseInt(spe[1], 10);
-			if (saldoAnteriorEmHoras >= 0) {
-				saldoAnteriorEmHoras += (parseInt(spe[2], 10) / 60);
-			} else {
-				saldoAnteriorEmHoras -= (parseInt(spe[2], 10) / 60);
+			if (spe) {
+				var saldoAnteriorEmHoras = parseInt(spe[1], 10);
+				if (saldoAnteriorEmHoras >= 0) {
+					saldoAnteriorEmHoras += (parseInt(spe[2], 10) / 60);
+				} else {
+					saldoAnteriorEmHoras -= (parseInt(spe[2], 10) / 60);
+				}
 			}
 
 			var total = saldoAtualEmHoras;
@@ -138,7 +140,7 @@ function callback() {
 		// ----
 
 		var forkme = '<a href="https://github.com/JulioGold/ponto"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>';
-	
+
 		$('body').html(forkme + espelho);
 		// --------------------------------------------------------------------------------
 	})(jQuery.noConflict(true))
